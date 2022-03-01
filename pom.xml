@@ -34,7 +34,7 @@
         <dependency>
             <groupId>net.fununity.misc</groupId>
             <artifactId>TranslationHandler</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>MASTER</version>
         </dependency>
         <dependency>
             <groupId>net.fununity.games</groupId>

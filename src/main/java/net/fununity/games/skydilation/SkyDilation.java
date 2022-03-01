@@ -1,35 +1,44 @@
 package net.fununity.games.skydilation;
 
-import net.fununity.games.skydilation.generator.DilationWorldGenerator;
+import net.fununity.games.skydilation.generator.BasicChunkGenerator;
+import net.fununity.main.api.FunUnityAPI;
 import net.fununity.main.api.minigames.MinigameNames;
-import net.fununity.main.api.minigames.stats.minigames.Minigames;
+import net.fununity.main.api.minigames.Minigames;
 import net.fununity.mgs.Minigame;
-import org.bukkit.WorldCreator;
+import net.fununity.mgs.gamespecifc.Arena;
+import net.fununity.mgs.gamestates.GameManager;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class SkyDilation extends JavaPlugin {
+import java.util.HashMap;
+
+public class SkyDilation extends JavaPlugin implements Listener {
 
     private static SkyDilation instance;
-    private DilationWorldGenerator generator;
+    private BasicChunkGenerator generator;
 
     @Override
     public void onEnable() {
         instance = this;
-        this.generator = new DilationWorldGenerator();
+        saveDefaultConfig();
+        this.generator = new BasicChunkGenerator();
 
-        getServer().createWorld(new WorldCreator("void"));
+        getServer().getPluginManager().registerEvents(this, this);
 
-        new Minigame(MinigameNames.SKYDILATION.getDisplayName(), Minigames.SKYDILATION, GameLogic.class);
-    }
-
-
-    public DilationWorldGenerator getSkyDilationGenerator() {
-        return this.generator;
+        getServer().getScheduler().runTask(this, () -> {
+            new Minigame(MinigameNames.SKYDILATION.getDisplayName(), Minigames.SKYDILATION, GameLogic.class);
+            FunUnityAPI.getInstance().getCommandHandler().addCommands(new GeneratorCommand());
+            GameManager.getInstance().getArenas().add(new Arena("void", FunUnityAPI.getPrefix(), new HashMap<>()));
+        });
     }
 
     @Override
-    public DilationWorldGenerator getDefaultWorldGenerator(String worldName, String id) {
-        return getSkyDilationGenerator();
+    public BasicChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
+        return generator;
+    }
+
+    public BasicChunkGenerator getGenerator() {
+        return generator;
     }
 
     public static SkyDilation getInstance() {

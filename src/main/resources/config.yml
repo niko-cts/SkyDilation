@@ -1,0 +1,108 @@
+# Ore populator percentages
+ore:
+  DESERT:
+    COAL_ORE:
+      tries: 15
+      chanceOfSpawning: 60
+      minY: 20
+      maxY: 40
+      chanceOfVein: 40
+    IRON_ORE:
+      tries: 10
+      chanceOfSpawning: 30
+      minY: 20
+      maxY: 40
+      chanceOfVein: 40
+  FOREST:
+    COAL_ORE:
+      tries: 15
+      chanceOfSpawning: 60
+      minY: 20
+      maxY: 40
+      chanceOfVein: 40
+    IRON_ORE:
+      tries: 10
+      chanceOfSpawning: 30
+      minY: 20
+      maxY: 40
+      chanceOfVein: 40
+  PLAINS:
+    COAL_ORE:
+      tries: 15
+      chanceOfSpawning: 60
+      minY: 20
+      maxY: 40
+      chanceOfVein: 40
+    IRON_ORE:
+      tries: 10
+      chanceOfSpawning: 30
+      minY: 20
+      maxY: 40
+      chanceOfVein: 40
+  SWAMP:
+    COAL_ORE:
+      tries: 15
+      chanceOfSpawning: 60
+      minY: 20
+      maxY: 40
+      chanceOfVein: 40
+    IRON_ORE:
+      tries: 10
+      chanceOfSpawning: 30
+      minY: 20
+      maxY: 40
+      chanceOfVein: 40
+  HILLS:
+    COAL_ORE:
+      tries: 15
+      chanceOfSpawning: 60
+      minY: 20
+      maxY: 40
+      chanceOfVein: 40
+    IRON_ORE:
+      tries: 10
+      chanceOfSpawning: 30
+      minY: 20
+      maxY: 40
+      chanceOfVein: 40
+
+
+# Grass population
+# Specify the percentage of each spawn material in the biome.
+grass:
+  DESERT:
+    LONG_GRASS:
+      tries: 5
+      data: 1
+      percentage: 60
+    RED_ROSE:
+      tries: 3
+      data: 0
+      percentage: 40
+    YELLOW_FLOWER:
+      tries: 3
+      data: 0
+      percentage: 40
+
+trees:
+  DESERT:
+    TREE:
+      tries: 3
+      percentage: 60
+  FOREST:
+    TREE:
+      tries: 3
+      percentage: 60
+  PLAINS:
+    TREE:
+      tries: 3
+      percentage: 60
+  SWAMP:
+    TREE:
+      tries: 3
+      percentage: 60
+  HILLS:
+    TREE:
+      tries: 3
+      percentage: 60
+

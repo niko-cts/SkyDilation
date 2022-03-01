@@ -2,6 +2,8 @@ name: SkyDilation
 version: 0.0.1
 author: Niko
 main: net.fununity.games.skydilation.SkyDilation
+load: STARTUP
+
 depend:
   - FunUnityAPI
   - MinigameSystem

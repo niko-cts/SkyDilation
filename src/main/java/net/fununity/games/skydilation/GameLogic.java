@@ -1,5 +1,9 @@
 package net.fununity.games.skydilation;
 
+import net.fununity.games.skydilation.generator.Biomes;
+import net.fununity.games.skydilation.generator.ChunkLogic;
+import net.fununity.main.api.FunUnityAPI;
+import net.fununity.main.api.server.ServerSetting;
 import net.fununity.main.api.util.LocationUtil;
 import net.fununity.mgs.gamespecifc.Arena;
 import net.fununity.mgs.gamespecifc.Team;
@@ -15,38 +19,46 @@ import java.util.List;
 
 public class GameLogic extends Game {
 
-    private static final int DISTANCE_BETWEEN = 100;
+    private static final int DISTANCE_BETWEEN = 300;
 
     @Override
     public void preMinigameStart() {
         super.preMinigameStart();
+        ChunkLogic.loadLogic(this);
 
         Arena arena = getArena();
 
-        int teamSize = getAliveTeams().size();
         Location location = new Location(arena.getWorld(), 0, 50, 0);
-        SkyDilation.getInstance().getSkyDilationGenerator().getMinAndMax()[0] = location.getChunk();
+        // set min chunk
+        ChunkLogic.getInstance().getMinAndMax()[0] = location.getChunk();
+
         int[] max = new int[]{location.getChunk().getX(), location.getChunk().getZ()};
-        for (int i = 0; i < teamSize; i++) {
+        for (int i = 0; i < getAliveTeams().size(); i++) {
             Team team = getAliveTeams().get(i);
             Chunk chunk = location.getChunk();
             for (int x = chunk.getX() - 1; x < chunk.getX() + 1; x++) {
                 for (int z = chunk.getZ() - 1; z < chunk.getZ() + 1; z++) {
-                    SkyDilation.getInstance().getSkyDilationGenerator().generateChunk(arena.getWorld(), x, z);
-                    System.out.println(team.getName() + ": " + x + "  " + z);
+                    SkyDilation.getInstance().getGenerator().generateChunk(arena.getWorld().getChunkAt(x, z), Biomes.PLAINS);
 
                     max[1] = Math.max(z, max[1]);
                 }
                 max[0] = Math.max(x, max[0]);
             }
             location.setY(LocationUtil.getBlockHeight(location) + 1);
-            arena.setSpecifiedLocations(team.getName(), Collections.singletonList(location));
+            arena.setSpecifiedLocations(team.getName(), Collections.singletonList(location.clone()));
             Location chest = location.clone().add(1, 0, 0);
             chest.setY(chest.getWorld().getHighestBlockYAt(chest));
             chest.getBlock().setType(Material.ENDER_CHEST);
-            addSpawnLocation(location, i, teamSize);
+            addSpawnLocation(location, i, getAliveTeams().size());
         }
-        SkyDilation.getInstance().getSkyDilationGenerator().getMinAndMax()[1] = arena.getWorld().getChunkAt(max[0], max[1]);
+
+        // set max chunk
+        ChunkLogic.getInstance().getMinAndMax()[1] = arena.getWorld().getChunkAt(max[0], max[1]);
+    }
+
+    @Override
+    public void startMinigame() {
+        FunUnityAPI.getInstance().getServerSettings().enable(ServerSetting.FOOD_LEVEL_CHANGE, ServerSetting.BLOCK_BREAK, ServerSetting.BLOCK_PLACE, ServerSetting.ENTITY_DAMAGE, ServerSetting.HANGING_BREAK, ServerSetting.ITEM_CONSUME, ServerSetting.PVP);
     }
 
     private void addSpawnLocation(Location location, int i, int teamSize) {
@@ -54,22 +66,13 @@ public class GameLogic extends Game {
         location.add(Math.cos(angle) * DISTANCE_BETWEEN, 0, Math.sin(angle) * DISTANCE_BETWEEN);
     }
 
-    @Override
-    public void startMinigame() {
-        // todo
-    }
 
     @Override
     public void minigameCountdown(int seconds) {
+        if (seconds % 60 == 0)
+            ChunkLogic.getInstance().generateRandomChunk(getArena().getWorld());
         if (seconds % 30 == 0)
-            generateNewChunks();
-
-    }
-
-    private void generateNewChunks() {
-        System.out.println("Try to generate");
-        SkyDilation.getInstance().getDefaultWorldGenerator("", "").addChunkWhitelist(1, 0);
-        getArena().getWorld().regenerateChunk(getRemainingTicks() / 30, 0);
+            ChunkLogic.getInstance().generateNewTeamChunks();
     }
 
     @Override
