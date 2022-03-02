@@ -3,6 +3,7 @@ package net.fununity.games.skydilation.generator;
 import net.fununity.games.skydilation.util.MaterialPercentage;
 import net.fununity.main.api.common.util.RandomUtil;
 import org.bukkit.Material;
+import org.bukkit.TreeType;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 

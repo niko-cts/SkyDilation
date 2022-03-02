@@ -1,6 +1,7 @@
 package net.fununity.games.skydilation;
 
 import net.fununity.games.skydilation.generator.BasicChunkGenerator;
+import net.fununity.games.skydilation.listener.BlockBreakListener;
 import net.fununity.main.api.FunUnityAPI;
 import net.fununity.main.api.minigames.MinigameNames;
 import net.fununity.main.api.minigames.Minigames;
@@ -23,7 +24,7 @@ public class SkyDilation extends JavaPlugin implements Listener {
         saveDefaultConfig();
         this.generator = new BasicChunkGenerator();
 
-        getServer().getPluginManager().registerEvents(this, this);
+        getServer().getPluginManager().registerEvents(new BlockBreakListener(), this);
 
         getServer().getScheduler().runTask(this, () -> {
             new Minigame(MinigameNames.SKYDILATION.getDisplayName(), Minigames.SKYDILATION, GameLogic.class);

@@ -2,6 +2,7 @@ package net.fununity.games.skydilation.generator;
 
 import net.fununity.games.skydilation.generator.populator.GrassPopulator;
 import net.fununity.games.skydilation.generator.populator.OrePopulator;
+import net.fununity.games.skydilation.generator.populator.TreasurePopulator;
 import net.fununity.games.skydilation.generator.populator.TreePopulator;
 import net.fununity.main.api.common.util.RandomUtil;
 import org.bukkit.Chunk;
@@ -19,7 +20,7 @@ public class BasicChunkGenerator extends ChunkGenerator {
 
     public BasicChunkGenerator() {
         this.generateAbleChunks = new HashMap<>();
-        this.populators = Arrays.asList(new TreePopulator(), new GrassPopulator(), new OrePopulator());
+        this.populators = Arrays.asList(new TreePopulator(), new GrassPopulator(), new OrePopulator(), new TreasurePopulator());
     }
 
     public boolean containsChunk(Chunk chunk) {
