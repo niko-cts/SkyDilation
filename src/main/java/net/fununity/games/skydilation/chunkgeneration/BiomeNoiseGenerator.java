@@ -1,4 +1,4 @@
-package net.fununity.games.skydilation.generator;
+package net.fununity.games.skydilation.chunkgeneration;
 
 import org.bukkit.World;
 import org.bukkit.util.noise.PerlinOctaveGenerator;

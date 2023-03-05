@@ -1,9 +1,12 @@
 package net.fununity.games.skydilation;
 
-import net.fununity.games.skydilation.generator.BasicChunkGenerator;
-import net.fununity.games.skydilation.listener.BlockBreakListener;
+import net.fununity.games.skydilation.dropping.ItemDroppingManager;
+import net.fununity.games.skydilation.chunkgeneration.BasicChunkGenerator;
+import net.fununity.games.skydilation.language.EnglishMessages;
+import net.fununity.games.skydilation.language.GermanMessages;
+import net.fununity.games.skydilation.shop.ShopGUI;
+import net.fununity.games.skydilation.util.RandomItemsUtil;
 import net.fununity.main.api.FunUnityAPI;
-import net.fununity.main.api.minigames.MinigameNames;
 import net.fununity.main.api.minigames.Minigames;
 import net.fununity.mgs.Minigame;
 import net.fununity.mgs.gamespecifc.Arena;
@@ -23,14 +26,22 @@ public class SkyDilation extends JavaPlugin implements Listener {
         instance = this;
         saveDefaultConfig();
         this.generator = new BasicChunkGenerator();
+        getServer().getScheduler().runTaskAsynchronously(this, RandomItemsUtil::getInstance);
+        getServer().getScheduler().runTaskAsynchronously(this, ItemDroppingManager::getInstance);
+        getServer().getScheduler().runTaskAsynchronously(this, BasicChunkGenerator::getPopulator);
 
-        getServer().getPluginManager().registerEvents(new BlockBreakListener(), this);
+        // because plugin will load on LOAD state, implementations need to be loaded later on
+        getServer().getScheduler().runTaskLater(this, () -> {
+            new GermanMessages();
+            new EnglishMessages();
 
-        getServer().getScheduler().runTask(this, () -> {
-            new Minigame(MinigameNames.SKYDILATION.getDisplayName(), Minigames.SKYDILATION, GameLogic.class);
-            FunUnityAPI.getInstance().getCommandHandler().addCommands(new GeneratorCommand());
+            ShopGUI.setupShops();
+
+            new Minigame(Minigames.SKYDILATION, GameLogic.class).setLobbyTime(2).setGameTime(3600);
+
             GameManager.getInstance().getArenas().add(new Arena("void", FunUnityAPI.getPrefix(), new HashMap<>()));
-        });
+            getServer().getWorld("void").setGameRuleValue("randomTickSpeed", "0");
+        }, 1L);
     }
 
     @Override

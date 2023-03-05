@@ -1,123 +1,269 @@
-# Ore populator percentages
-ore:
-  DESERT:
-    COAL_ORE:
-      tries: 15
-      chanceOfSpawning: 60
-      minY: 20
-      maxY: 40
-      chanceOfVein: 40
-    IRON_ORE:
-      tries: 10
-      chanceOfSpawning: 30
-      minY: 20
-      maxY: 40
-      chanceOfVein: 40
-  FOREST:
-    COAL_ORE:
-      tries: 15
-      chanceOfSpawning: 60
-      minY: 20
-      maxY: 40
-      chanceOfVein: 40
-    IRON_ORE:
-      tries: 10
-      chanceOfSpawning: 30
-      minY: 20
-      maxY: 40
-      chanceOfVein: 40
-  PLAINS:
-    COAL_ORE:
-      tries: 15
-      chanceOfSpawning: 60
-      minY: 20
-      maxY: 40
-      chanceOfVein: 40
-    IRON_ORE:
-      tries: 10
-      chanceOfSpawning: 30
-      minY: 20
-      maxY: 40
-      chanceOfVein: 40
-  SWAMP:
-    COAL_ORE:
-      tries: 15
-      chanceOfSpawning: 60
-      minY: 20
-      maxY: 40
-      chanceOfVein: 40
-    IRON_ORE:
-      tries: 10
-      chanceOfSpawning: 30
-      minY: 20
-      maxY: 40
-      chanceOfVein: 40
-  HILLS:
-    COAL_ORE:
-      tries: 15
-      chanceOfSpawning: 60
-      minY: 20
-      maxY: 40
-      chanceOfVein: 40
-    IRON_ORE:
-      tries: 10
-      chanceOfSpawning: 30
-      minY: 20
-      maxY: 40
-      chanceOfVein: 40
+# Explaining the standard terms in the config.
+# data: <byte> - This is used by the material e.g. for a spruce sapling you need material: sapling, data: 1
+# tries: <int> - How often it should be tried to generate the element.
+# percentage: <int> - With which probability will this element occur.
 
 
-# Grass population
-# Specify the percentage of each spawn material in the biome.
+# The probability of biomes
+# Biomes: probability in 0.00
+# (This does not need to add up to 1.0)
+biomes:
+  PLAINS: 0.22
+  SAVANNA: 0.19
+  JUNGLE: 0.15
+
+  DESERT: 0.1
+  MUSHROOM: 0.07
+
+  NETHER_1: 0.12
+  NETHER_2: 0.08
+
+  END: 0.05
+
+
+# Specify the probability of spawning blocks in each biome.
+# Structure: biomes:MATERIAL:
+
 grass:
+  PLAINS:
+    RED_ROSE:
+      tries: 2
+      data: 0
+      percentage: 40
+    YELLOW_FLOWER:
+      tries: 2
+      data: 0
+      percentage: 40
+  SAVANNA:
+    LONG_GRASS:
+      tries: 10
+      data: 1
+      percentage: 60
+    RED_ROSE:
+      tries: 2
+      data: 0
+      percentage: 40
+    YELLOW_FLOWER:
+      tries: 2
+      data: 0
+      percentage: 40
+  JUNGLE:
+    MELON_BLOCK:
+      tries: 3
+      data: 0
+      percentage: 40
+    LONG_GRASS:
+      tries: 10
+      data: 1
+      percentage: 30
+    RED_ROSE:
+      tries: 2
+      data: 0
+      percentage: 40
+    YELLOW_FLOWER:
+      tries: 2
+      data: 0
+      percentage: 40
   DESERT:
     CACTUS:
-      tries: 5
-      data: 1
+      tries: 2
+      data: 0
       percentage: 60
-  PLAINS:
-    LONG_GRASS:
-      tries: 20
-      data: 1
-      percentage: 60
-    RED_ROSE:
+    DEAD_BUSH:
+      tries: 3
+      data: 0
+      percentage: 30
+  MUSHROOM:
+    RED_MUSHROOM:
+      tries: 3
+      data: 0
+      percentage: 25
+    BROWN_MUSHROOM:
+      tries: 3
+      data: 0
+      percentage: 25
+  NETHER_1:
+    GLOWSTONE:
+      tries: 4
+      data: 0
+      percentage: 40
+    NETHER_WARTS:
       tries: 3
       data: 0
       percentage: 40
-    YELLOW_FLOWER:
+    RED_MUSHROOM:
       tries: 3
       data: 0
-      percentage: 40
-  FOREST:
-    LONG_GRASS:
-      tries: 20
-      data: 1
-      percentage: 60
-    RED_ROSE:
+      percentage: 10
+    BROWN_MUSHROOM:
       tries: 3
       data: 0
-      percentage: 40
-    YELLOW_FLOWER:
+      percentage: 10
+  NETHER_2:
+    MAGMA:
       tries: 3
       data: 0
-      percentage: 40
+      percentage: 45
+    RED_MUSHROOM:
+      tries: 3
+      data: 0
+      percentage: 10
+    BROWN_MUSHROOM:
+      tries: 3
+      data: 0
+      percentage: 10
 
+
+# Specify the probability of trees generating in each biome.
+# Structure: BIOME:TREETYPE:
+# Lookup TreeType list of 1.12.2
 trees:
-  FOREST:
-    TREE:
-      tries: 3
-      percentage: 60
   PLAINS:
     TREE:
       tries: 3
-      percentage: 60
-  SWAMP:
-    SWAMP:
+      percentage: 40
+  SAVANNA:
+    ACACIA:
       tries: 3
-      percentage: 60
+      percentage: 35
+  JUNGLE:
+    SMALL_JUNGLE:
+      tries: 2
+      percentage: 25
+    COCOA_TREE:
+      tries: 2
+      percentage: 25
+    JUNGLE_BUSH:
+      tries: 3
+      percentage: 20
+  END:
+    CHORUS_PLANT:
+      tries: 3
+      percentage: 35
+  MUSHROOM:
+    RED_MUSHROOM:
+      tries: 3
+      percentage: 45
+    BROWN_MUSHROOM:
+      tries: 2
+      percentage: 45
+
+# Specify the probability of treasure chests occurring in each biome.
+# The max-richness sets the maximum possible amount of richness. It is chosen randomly.
+# The richness is determined in treasure-items.
+# Structure: BIOME:
+treasure:
+  SAVANNA:
+    tries: 1
+    percentage: 30
+    maxRichness: 1
+  JUNGLE:
+    tries: 1
+    percentage: 30
+    maxRichness: 2
+  DESERT:
+    tries: 1
+    percentage: 30
+    maxRichness: 2
+  MUSHROOM:
+    tries: 1
+    percentage: 30
+    maxRichness: 3
+  NETHER_1:
+    tries: 1
+    percentage: 30
+    maxRichness: 3
+  NETHER_2:
+    tries: 1
+    percentage: 30
+    maxRichness: 4
+  END:
+    tries: 1
+    percentage: 30
+    maxRichness: 4
 
 
+# Determine the ore probability a material can spawn when creating a chunk.
+# Structure: BIOME: 'MATERIAL:SUBID:PROBABILITY;'
+# The MATERIAL needs to be the exact spigot 1.12 Material name
+ores:
+  PLAINS: 'COAL_ORE:0:0.03;IRON_ORE:0:0.01;GOLD_ORE:0:0.005'
+  SAVANNA: 'COAL_ORE:0:0.06;IRON_ORE:0:0.015;GOLD_ORE:0:0.01'
+  JUNGLE: 'COAL_ORE:0:0.08;IRON_ORE:0:0.02;GOLD_ORE:0:0.025'
 
+  DESERT: 'COAL_ORE:0:0.01;IRON_ORE:0:0.03;GOLD_ORE:0:0.005'
+  MUSHROOM: 'COAL_ORE:0:0.015;IRON_ORE:0:0.06;GOLD_ORE:0:0.01'
+
+  NETHER_1: 'QUARTZ_ORE:0:0.06;GOLD_ORE:0:0.02:LAVA:0:0.02'
+  NETHER_2: 'QUARTZ_ORE:0:0.02;GOLD_ORE:0:0.06:LAVA:0:0.02'
+
+  END: 'QUARTZ_ORE:0:0.03;IRON_ORE:0:0.015;GOLD_ORE:0:0.025'
+
+
+# All items, which should drop an item in a specified time.
+# Structure 1: TRIGGER_MATERIAL: data: ... particle: ...
+# Structure 2: TRIGGER_MATERIAL: ... particle:  ...
+# define the material to drop in 'drop'
+# the particle will spawn when placing the item.
+items:
+  SAPLING:
+    0:
+      time: 400
+      drop: 'COAL'
+      particle:
+        color: 0x000000
+        repeat: 30
+    1:
+      time: 300
+      drop: 'COAL'
+      particle:
+        color: 0x000000
+        repeat: 20
+    3:
+      time: 100
+      drop: 'COAL'
+      particle:
+        color: 0x000000
+        repeat: 10
+  DEAD_BUSH:
+    time: 200
+    drop: 'IRON_INGOT'
+    particle:
+      color: 0xC0C0C0
+      repeat: 20
+  RED_MUSHROOM:
+    time: 200
+    drop: 'IRON_INGOT'
+    particle:
+      color: 0xC0C0C0
+      repeat: 15
+  BROWN_MUSHROOM:
+    time: 150
+    drop: 'IRON_INGOT'
+    particle:
+      color: 0xC0C0C0
+      repeat: 10
+  MAGMA:
+    time: 400
+    drop: 'GOLD_INGOT'
+    particle:
+      color: 0xFFA500
+      repeat: 10
+  NETHER_WARTS:
+    time: 600
+    drop: 'QUARTZ'
+    particle:
+      color: 0xFFFFFF
+      repeat: 5
+  CHORUS_FLOWER:
+    time: 600
+    drop: 'NETHER_STAR'
+    particle:
+      color: 0x800080
+      repeat: 10
+
+
+# KNOCKBACK:1  ARROW_INFINITE:1   ARROW_KNOCKBACK:1    FIRE_ASPECT:1  PROTECTION_ENVIRONMENTAL:1  PROTECTION_ENVIRONMENTAL:2  PROTECTION_FIRE:1   PROTECTION_PROJECTILE:1   THORNS:2
 # Determine the probability an item drop depending on richness.
 # To add an entry just type:
 # MATERIAL:SUBID:PROBABILITY;
@@ -133,12 +279,9 @@ trees:
 # The MATERIAL needs to be the exact spigot 1.12 MATERIAL name: https://aboodyy.net/spigot-api/javadocs/1.12.2/org/bukkit/Material.html
 # The ENCHANTMENT needs to be the exact spigot 1.12 ENCHANTMENT name: https://aboodyy.net/spigot-api/javadocs/1.12.2/org/bukkit/enchantments/Enchantment.html
 # The POTION needs to be the exact spigot 1.12 POTION name: https://aboodyy.net/spigot-api/javadocs/1.12.2/org/bukkit/potion/PotionType.html
-item-drops:
-  0: 'COBBLESTONE:0:1:50;TORCH:0:10:20;DIRT:0:1:10;STONE:0:1:10;OBSIDIAN:0:1:10'
-  1: 'GOLD_CHESTPLATE:0:1:2;GOLD_LEGGINGS:0:1:2;GOLD_HELMET:0:1:2;GOLD_BOOTS:0:1:2;IRON_CHESTPLATE:0:1:5;IRON_LEGGINGS:0:1:5;IRON_HELMET:0:1:5;IRON_BOOTS:0:1:5;DIAMOND_CHESTPLATE:0:1:1;DIAMOND_LEGGINGS:0:1:1;DIAMOND_HELMET:0:1:0.5;DIAMOND_BOOTS:0:1:0.5;GOLD_CHESTPLATE:0:1:3:PROTECTION_ENVIRONMENTAL:1;GOLD_LEGGINGS:0:1:1:PROTECTION_ENVIRONMENTAL:1;GOLD_HELMET:0:1:1:PROTECTION_ENVIRONMENTAL:1;GOLD_BOOTS:0:1:0.25:PROTECTION_ENVIRONMENTAL:1;IRON_CHESTPLATE:0:1:2:PROTECTION_ENVIRONMENTAL:1;IRON_LEGGINGS:0:1:2:PROTECTION_ENVIRONMENTAL:1;IRON_HELMET:0:1:2:PROTECTION_ENVIRONMENTAL:1;IRON_BOOTS:0:1:0.5:PROTECTION_ENVIRONMENTAL:1;DIAMOND_CHESTPLATE:0:1:1:PROTECTION_ENVIRONMENTAL:1;DIAMOND_LEGGINGS:0:1:3:PROTECTION_ENVIRONMENTAL:1;DIAMOND_HELMET:0:1:1:PROTECTION_ENVIRONMENTAL:1;DIAMOND_BOOTS:0:1:0.25:PROTECTION_ENVIRONMENTAL:1;IRON_CHESTPLATE:0:1:2:PROTECTION_ENVIRONMENTAL:2;IRON_LEGGINGS:0:1:2:PROTECTION_ENVIRONMENTAL:2;IRON_HELMET:0:1:4:PROTECTION_ENVIRONMENTAL:2;IRON_BOOTS:0:1:0.5:PROTECTION_ENVIRONMENTAL:2;DIAMOND_CHESTPLATE:0:1:1:PROTECTION_ENVIRONMENTAL:2;DIAMOND_LEGGINGS:0:1:1:PROTECTION_ENVIRONMENTAL:2;DIAMOND_HELMET:0:1:1:PROTECTION_ENVIRONMENTAL:2;DIAMOND_BOOTS:0:1:0.25:PROTECTION_ENVIRONMENTAL:2;GOLD_CHESTPLATE:0:1:0.5:PROTECTION_FIRE:1;GOLD_LEGGINGS:0:1:0.5:PROTECTION_FIRE:1;GOLD_HELMET:0:1:0.5:PROTECTION_FIRE:1;IRON_CHESTPLATE:0:1:3:PROTECTION_FIRE:1;IRON_LEGGINGS:0:1:1:PROTECTION_FIRE:1;IRON_HELMET:0:1:1:PROTECTION_FIRE:1;DIAMOND_CHESTPLATE:0:1:0.5:PROTECTION_FIRE:1;DIAMOND_LEGGINGS:0:1:0.5:PROTECTION_FIRE:1;DIAMOND_HELMET:0:1:0.5:PROTECTION_FIRE:1;IRON_CHESTPLATE:0:1:2:PROTECTION_PROJECTILE:1;IRON_LEGGINGS:0:1:1:PROTECTION_PROJECTILE:1;IRON_HELMET:0:1:1.5:PROTECTION_PROJECTILE:1;IRON_BOOTS:0:1:0.5:PROTECTION_PROJECTILE:1;DIAMOND_CHESTPLATE:0:1:3:PROTECTION_PROJECTILE:1;DIAMOND_LEGGINGS:0:1:1:PROTECTION_PROJECTILE:1;DIAMOND_HELMET:0:1:1:PROTECTION_PROJECTILE:1;IRON_CHESTPLATE:0:1:1:THORNS:1;IRON_LEGGINGS:0:1:1:THORNS:1;IRON_HELMET:0:1:1:THORNS:1;DIAMOND_CHESTPLATE:0:1:2:THORNS:1;DIAMOND_LEGGINGS:0:1:2:THORNS:1;DIAMOND_HELMET:0:1:2:THORNS:1;IRON_CHESTPLATE:0:1:0.5:THORNS:2;IRON_LEGGINGS:0:1:0.5:THORNS:2;IRON_HELMET:0:1:0.5:THORNS:2;DIAMOND_CHESTPLATE:0:1:1:THORNS:2;DIAMOND_LEGGINGS:0:1:1:THORNS:2;DIAMOND_HELMET:0:1:1:THORNS:2;DIAMOND_CHESTPLATE:0:1:0.5:PROTECTION_ENVIRONMENTAL:4;IRON_BOOTS:0:1:4:PROTECTION_FALL:1;DIAMOND_BOOTS:0:1:5:PROTECTION_FALL:1'
-  2: 'IRON_PICKAXE:0:1:10:DIG_SPEED:3;DIAMOND_PICKAXE:0:1:7.5:DIG_SPEED:3;IRON_PICKAXE:0:1:5:DIG_SPEED:5;DIAMOND_PICKAXE:0:1:2.5:DIG_SPEED:5;GRILLED_PORK:0:1:25;CARROT:0:10:25;GRILLED_PORK:0:5:25'
-  3: 'STONE_SWORD:0:1:5;IRON_SWORD:0:1:5.5;DIAMOND_SWORD:0:1:2.5;FISHING_ROD:0:1:7;BOW:0:1:5;ARROW:0:10:20;FLINT_AND_STEEL:0:1:5;IRON_SWORD:0:1:2.5:KNOCKBACK:1;DIAMOND_SWORD:0:1:2.5:KNOCKBACK:1;IRON_SWORD:0:1:3:FIRE_ASPECT:1;DIAMOND_SWORD:0:1:1:FIRE_ASPECT:1;STONE_SWORD:0:1:10:DAMAGE_ALL:1;IRON_SWORD:0:1:5:DAMAGE_ALL:1;DIAMOND_SWORD:0:1:5:DAMAGE_ALL:1;IRON_SWORD:0:1:2:DAMAGE_ALL:2;DIAMOND_SWORD:0:1:1:DAMAGE_ALL:2;DIAMOND_SWORD:0:1:0.5:DAMAGE_ALL:4;BOW:0:1:5:ARROW_KNOCKBACK:1;BOW:0:1:2.5:ARROW_DAMAGE:1;BOW:0:1:2:ARROW_DAMAGE:2;BOW:0:1:2.5:ARROW_FIRE:1;BOW:0:1:5.5:ARROW_INFINITE:1'
-  4: 'EGG:0:1:10;TNT:0:1:10;SPLASH_POTION:0:1:10:HEAL:80:3:255;SPLASH_POTION:0:1:10:POISON:100:3:255;LAVA_BUCKET:0:1:10;WATER_BUCKET:0:1:10;COMPASS:0:1:10;MONSTER_EGG:60:1:10;GOLDEN_APPLE:0:1:20'
-
-
-# KNOCKBACK:1  ARROW_INFINITE:1   ARROW_KNOCKBACK:1    FIRE_ASPECT:1  PROTECTION_ENVIRONMENTAL:1  PROTECTION_ENVIRONMENTAL:2  PROTECTION_FIRE:1   PROTECTION_PROJECTILE:1   THORNS:2
+treasure-items:
+  0: 'AIR:0:1:90;COBBLESTONE:0:1:50;TORCH:0:10:20;DIRT:0:1:10;STONE:0:1:10;OBSIDIAN:0:1:10'
+  1: 'AIR:0:1:90;GOLD_CHESTPLATE:0:1:2;GOLD_LEGGINGS:0:1:2;GOLD_HELMET:0:1:2;GOLD_BOOTS:0:1:2;IRON_CHESTPLATE:0:1:5;IRON_LEGGINGS:0:1:5;IRON_HELMET:0:1:5;IRON_BOOTS:0:1:5;DIAMOND_CHESTPLATE:0:1:1;DIAMOND_LEGGINGS:0:1:1;DIAMOND_HELMET:0:1:0.5;DIAMOND_BOOTS:0:1:0.5;GOLD_CHESTPLATE:0:1:3:PROTECTION_ENVIRONMENTAL:1;GOLD_LEGGINGS:0:1:1:PROTECTION_ENVIRONMENTAL:1;GOLD_HELMET:0:1:1:PROTECTION_ENVIRONMENTAL:1;GOLD_BOOTS:0:1:0.25:PROTECTION_ENVIRONMENTAL:1;IRON_CHESTPLATE:0:1:2:PROTECTION_ENVIRONMENTAL:1;IRON_LEGGINGS:0:1:2:PROTECTION_ENVIRONMENTAL:1;IRON_HELMET:0:1:2:PROTECTION_ENVIRONMENTAL:1;IRON_BOOTS:0:1:0.5:PROTECTION_ENVIRONMENTAL:1;DIAMOND_CHESTPLATE:0:1:1:PROTECTION_ENVIRONMENTAL:1;DIAMOND_LEGGINGS:0:1:3:PROTECTION_ENVIRONMENTAL:1;DIAMOND_HELMET:0:1:1:PROTECTION_ENVIRONMENTAL:1;DIAMOND_BOOTS:0:1:0.25:PROTECTION_ENVIRONMENTAL:1;IRON_CHESTPLATE:0:1:2:PROTECTION_ENVIRONMENTAL:2;IRON_LEGGINGS:0:1:2:PROTECTION_ENVIRONMENTAL:2;IRON_HELMET:0:1:4:PROTECTION_ENVIRONMENTAL:2;IRON_BOOTS:0:1:0.5:PROTECTION_ENVIRONMENTAL:2;DIAMOND_CHESTPLATE:0:1:1:PROTECTION_ENVIRONMENTAL:2;DIAMOND_LEGGINGS:0:1:1:PROTECTION_ENVIRONMENTAL:2;DIAMOND_HELMET:0:1:1:PROTECTION_ENVIRONMENTAL:2;DIAMOND_BOOTS:0:1:0.25:PROTECTION_ENVIRONMENTAL:2;GOLD_CHESTPLATE:0:1:0.5:PROTECTION_FIRE:1;GOLD_LEGGINGS:0:1:0.5:PROTECTION_FIRE:1;GOLD_HELMET:0:1:0.5:PROTECTION_FIRE:1;IRON_CHESTPLATE:0:1:3:PROTECTION_FIRE:1;IRON_LEGGINGS:0:1:1:PROTECTION_FIRE:1;IRON_HELMET:0:1:1:PROTECTION_FIRE:1;DIAMOND_CHESTPLATE:0:1:0.5:PROTECTION_FIRE:1;DIAMOND_LEGGINGS:0:1:0.5:PROTECTION_FIRE:1;DIAMOND_HELMET:0:1:0.5:PROTECTION_FIRE:1;IRON_CHESTPLATE:0:1:2:PROTECTION_PROJECTILE:1;IRON_LEGGINGS:0:1:1:PROTECTION_PROJECTILE:1;IRON_HELMET:0:1:1.5:PROTECTION_PROJECTILE:1;IRON_BOOTS:0:1:0.5:PROTECTION_PROJECTILE:1;DIAMOND_CHESTPLATE:0:1:3:PROTECTION_PROJECTILE:1;DIAMOND_LEGGINGS:0:1:1:PROTECTION_PROJECTILE:1;DIAMOND_HELMET:0:1:1:PROTECTION_PROJECTILE:1;IRON_CHESTPLATE:0:1:1:THORNS:1;IRON_LEGGINGS:0:1:1:THORNS:1;IRON_HELMET:0:1:1:THORNS:1;DIAMOND_CHESTPLATE:0:1:2:THORNS:1;DIAMOND_LEGGINGS:0:1:2:THORNS:1;DIAMOND_HELMET:0:1:2:THORNS:1;IRON_CHESTPLATE:0:1:0.5:THORNS:2;IRON_LEGGINGS:0:1:0.5:THORNS:2;IRON_HELMET:0:1:0.5:THORNS:2;DIAMOND_CHESTPLATE:0:1:1:THORNS:2;DIAMOND_LEGGINGS:0:1:1:THORNS:2;DIAMOND_HELMET:0:1:1:THORNS:2;DIAMOND_CHESTPLATE:0:1:0.5:PROTECTION_ENVIRONMENTAL:4;IRON_BOOTS:0:1:4:PROTECTION_FALL:1;DIAMOND_BOOTS:0:1:5:PROTECTION_FALL:1'
+  2: 'AIR:0:1:88;IRON_PICKAXE:0:1:10:DIG_SPEED:3;DIAMOND_PICKAXE:0:1:7.5:DIG_SPEED:3;IRON_PICKAXE:0:1:5:DIG_SPEED:5;DIAMOND_PICKAXE:0:1:2.5:DIG_SPEED:5;GRILLED_PORK:0:1:25;CARROT:0:10:25;GRILLED_PORK:0:5:25'
+  3: 'AIR:0:1:85;STONE_SWORD:0:1:5;IRON_SWORD:0:1:5.5;DIAMOND_SWORD:0:1:2.5;FISHING_ROD:0:1:7;BOW:0:1:5;ARROW:0:10:20;FLINT_AND_STEEL:0:1:5;IRON_SWORD:0:1:2.5:KNOCKBACK:1;DIAMOND_SWORD:0:1:2.5:KNOCKBACK:1;IRON_SWORD:0:1:3:FIRE_ASPECT:1;DIAMOND_SWORD:0:1:1:FIRE_ASPECT:1;STONE_SWORD:0:1:10:DAMAGE_ALL:1;IRON_SWORD:0:1:5:DAMAGE_ALL:1;DIAMOND_SWORD:0:1:5:DAMAGE_ALL:1;IRON_SWORD:0:1:2:DAMAGE_ALL:2;DIAMOND_SWORD:0:1:1:DAMAGE_ALL:2;DIAMOND_SWORD:0:1:0.5:DAMAGE_ALL:4;BOW:0:1:5:ARROW_KNOCKBACK:1;BOW:0:1:2.5:ARROW_DAMAGE:1;BOW:0:1:2:ARROW_DAMAGE:2;BOW:0:1:2.5:ARROW_FIRE:1;BOW:0:1:5.5:ARROW_INFINITE:1'
+  4: 'AIR:0:1:80;EGG:0:1:10;TNT:0:1:10;SPLASH_POTION:0:1:10:HEAL:80:3:255;SPLASH_POTION:0:1:10:POISON:100:3:255;LAVA_BUCKET:0:1:10;WATER_BUCKET:0:1:10;COMPASS:0:1:10;MONSTER_EGG:60:1:10;GOLDEN_APPLE:0:1:20'
