@@ -6,6 +6,7 @@ import net.fununity.games.skydilation.commands.ItemDropsCommand;
 import net.fununity.games.skydilation.dropping.ItemDroppingManager;
 import net.fununity.games.skydilation.language.TranslationKeys;
 import net.fununity.games.skydilation.listener.BlockListener;
+import net.fununity.games.skydilation.listener.SpecialItemsListener;
 import net.fununity.games.skydilation.listener.VillagerClickListener;
 import net.fununity.main.api.FunUnityAPI;
 import net.fununity.main.api.messages.MessagePrefix;
@@ -103,7 +104,7 @@ public class GameLogic extends Game {
     public void startMinigame() {
         FunUnityAPI.getInstance().getServerSettings().enable(ServerSetting.FOOD_LEVEL_CHANGE, ServerSetting.BLOCK_BREAK, ServerSetting.BLOCK_PLACE, ServerSetting.ENTITY_DAMAGE, ServerSetting.HANGING_BREAK, ServerSetting.ITEM_CONSUME, ServerSetting.PVP);
         RegisterUtil registerUtil = new RegisterUtil(SkyDilation.getInstance());
-        registerUtil.addListeners(new BlockListener(), new VillagerClickListener());
+        registerUtil.addListeners(new BlockListener(), new VillagerClickListener(), new SpecialItemsListener());
         registerUtil.addCommand(new ItemDropsCommand());
         registerUtil.register();
         BroadcastHandler.broadcastMessage(MessagePrefix.INFO, TranslationKeys.COMMANDS_ITEMDROPPING_INFO);

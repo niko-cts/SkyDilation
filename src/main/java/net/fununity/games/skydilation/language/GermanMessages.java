@@ -93,7 +93,8 @@ public class GermanMessages extends MessageList {
         add(TranslationKeys.SPECIAL_ENDER_PEARL, "&7Enderperle");
         add(TranslationKeys.SPECIAL_BLAZE_ROD, "&7Granatenwerfer");
         add(TranslationKeys.SPECIAL_GOLD_PLATE, "&7Sprungplatte");
-        add(TranslationKeys.SPECIAL_TELEPORT, "&7Teleportation! &e3 Sekunden &7nicht bewegen!");
+        add(TranslationKeys.ITEM_TELEPORT_START, "&7Teleportation! &e3 Sekunden &7nicht bewegen!");
+        add(TranslationKeys.ITEM_TELEPORT_CANCEL, "&7Teleportation &cabgebrochen&7!");
 
         // biome chooser
         add(TranslationKeys.BIOME_CHOOSER_LORE, "&7Choose what the next biome should be");

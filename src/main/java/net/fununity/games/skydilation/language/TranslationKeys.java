@@ -87,7 +87,8 @@ public class TranslationKeys {
     public static final String SPECIAL_ENDER_PEARL = SHOP_ITEM_COL + "special.enderpearl";
     public static final String SPECIAL_BLAZE_ROD = SHOP_ITEM_COL + "special.blazerod";
     public static final String SPECIAL_GOLD_PLATE = SHOP_ITEM_COL + "special.goldplate";
-    public static final String SPECIAL_TELEPORT = SHOP_ITEM_COL + "special.message.home";
+    public static final String ITEM_TELEPORT_START = SHOP_ITEM_COL + "special.teleport.start";
+    public static final String ITEM_TELEPORT_CANCEL = SHOP_ITEM_COL + "special.teleport.cancel";
 
     // biome chooser
     public static final String BIOME_CHOOSER_LORE = SHOP_COL + ".biomechooser.lore";

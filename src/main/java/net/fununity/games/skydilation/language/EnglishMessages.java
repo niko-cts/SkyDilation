@@ -93,7 +93,8 @@ public class EnglishMessages  extends MessageList {
         add(TranslationKeys.SPECIAL_ENDER_PEARL, "&7Ender Pearl");
         add(TranslationKeys.SPECIAL_BLAZE_ROD, "&7Granade Launcher");
         add(TranslationKeys.SPECIAL_GOLD_PLATE, "&7Jumppad");
-        add(TranslationKeys.SPECIAL_TELEPORT, "&7Teleport! Don't move for &e3 seconds&7!");
+        add(TranslationKeys.ITEM_TELEPORT_START, "&7Teleport! Don't move for &e3 seconds&7!");
+        add(TranslationKeys.ITEM_TELEPORT_CANCEL, "&cCanceled &7teleport!");
 
         // biome chooser
         add(TranslationKeys.BIOME_CHOOSER_LORE, "&7Choose what the next biome should be");
