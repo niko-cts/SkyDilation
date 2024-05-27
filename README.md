@@ -6,9 +6,8 @@ Welcome to the SkyDilation Minigame for Minecraft, a project aimed at showcasing
 
 # Features
 - A 2*2 Chunks is spawned for each Team
-- Every x seconds, a new chunk is append on each Teams Island
-- Custom Chunks with different biomes, chests and items are spawned
-- Some chunks are more difficult, but give better equipment
+- Every x seconds, a new chunk is appended on each Teams Island
+- Custom Chunks with different biomes, chests and items are spawned. Some chunks are more difficult, but give better equipment
 - GUI where each Team can decide which Biome comes next
 - Custom villager shop
 - pvp
